@@ -17,25 +17,24 @@ var pool = new Pool({
 /* GET home page. */
 
 router.get('/login', (req, res) => {
-  pool.query('SELECT message FROM message WHERE id = 1', (err, row) => {
-    res.render('login', { messageErr: row.rows[0].message })
-  })
+  if(req.session.messagelogin){
+    res.render('login', { messageErr: req.session.messagelogin })
+  }else{
+    res.render('login', { messageErr: '' })
+  }
 })
 
 router.post('/login', (req, res) => {
   pool.query(`SELECT * FROM users WHERE email = '${req.body.inputEmail}' AND password = '${req.body.inputPassword}'`, (err, row) => {
     if (row.rows.length != 0) {
-      pool.query('UPDATE message SET message = false WHERE id = 1', (err, row) => {
         req.session.user = {
           email: req.body.inputEmail,
           password: req.body.inputPassword
         }
         res.redirect('/')
-      })
     } else {
-      pool.query('UPDATE message SET message = true WHERE id = 1', (err, row) => {
-        res.redirect('/login')
-      })
+      req.session.messagelogin = 'Email or Password Salah !'
+      res.redirect('/login')
     }
   })
 })
@@ -74,7 +73,7 @@ router.get('/', function (req, res) {
             pool.query('SELECT * FROM columns', (err, colum) => {
               pool.query("SELECT userid, admin, firstname || ' ' || lastname as fullname FROM users", (err, user) => {
                 pool.query(`SELECT * FROM users WHERE email = '${req.session.user.email}'`, (err, checked) => {
-                  console.log(checked)                  
+                  console.log(checked)
                   res.render('index', {
                     data: row.rows,
                     user: user.rows,
