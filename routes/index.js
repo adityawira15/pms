@@ -14,6 +14,18 @@ var pool = new Pool({
   port: 5432
 });
 
+app.get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query('SELECT * FROM test_table');
+    res.render('pages/db', result);
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+});
+
 /* GET home page. */
 
 router.get('/login', (req, res) => {
