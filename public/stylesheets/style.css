@@ -1,0 +1,98 @@
+body {
+  font:"Lucida Grande", Helvetica, Arial, sans-serif;
+}
+h2{
+  margin-left: 5px;
+}
+select{
+  background-color: white;
+}
+table{
+  font-size: 15px;
+}
+
+.add-table{
+  width: 200px
+}
+/* .btn{
+
+} */
+.button{
+  background-color: #009efa;
+  color: white;
+  border-radius: 5px;
+  padding: 6px 20px;
+  margin-left: 13px
+}
+.body{
+  font:"Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 20px;
+}
+.b-delete{
+  background-color: #fa002a;
+  color: white;
+  border-radius: 5px;
+  padding: 6px 10px;
+}
+.b-edit{
+  background-color: #1d9101;
+  color: white;
+  border-radius: 5px;
+  padding: 6px 10px;
+}
+.checkbox-inline{
+  background-color: white;
+  margin: 8px 0px;
+  font-size: 20px
+}
+.container{
+  margin: 0px;
+  padding: 0px;
+}
+.custom-checkbox{
+  margin-left: 20px;
+}
+.date{
+  margin: 4px;
+  margin-left: 20px;
+  border-radius: 5px;
+  width: 30%;
+}
+.form-filter{
+  padding-top: 0px;
+  padding-left: 50px;
+}
+.input{
+  margin: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+.library-system{
+  padding: 20px;
+  color: black;
+}
+.login{
+  background-color: #dddddd;
+  padding: 15% 28%;
+}
+.n-issue{
+  width: 250px;
+}
+.nav-left{
+  width: 200px;
+  height: 620px;
+  background-color: #f0f0f0;
+}
+.row{
+  margin-left:0px;
+}
+.formfilter{
+  width: 70%;
+  margin: 0% 10%;
+}
+.formprofile{
+  margin: 0% 10%;
+}
+.td1{
+  margin: 5px
+}

@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="./../../stylesheets/style.css">
+  <title>Issues</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Project Management System</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Project
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+      </ul>
+    </div>
+    <a href="/logout" onclick="confirm('are you sure ?')">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</button>
+    </a>
+  </nav>
+  <div class="row">
+    <div class="col-md-2" style="padding:0px; background-color:#f0f0f0; height: auto;">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link" id="v-pills-home-tab"href="/details/<%=projectid%>" aria-selected="false">Overview</a>
+        <a class="nav-link" id="v-pills-profile-tab" href="/activity/<%=projectid%>" aria-selected="false">Activity</a>
+        <a class="nav-link" id="v-pills-messages-tab" href="/members/<%=projectid%>" aria-selected="false">Members</a>
+        <a class="nav-link active" href="" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="true">Issues</a>
+      </div>
+    </div>
+    <div class="body col-md-9">
+      <h1>Issues</h1>
+      <h2>Filters</h2>
+      <form action="/issues/<%=projectid%>" method="GET">
+        <table class="table formfilter">
+          <tbody>
+            <tr>
+              <%if(query.cid){%>
+                <td>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="cid" checked>ID </label>
+                </td>
+                <%}else{%>
+                  <td>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" name="cid">ID </label>
+                  </td>
+                  <%}%>
+                    <td>
+                      <input type="number" class="input" placeholder="ID" name="id" value="<%=query.id%>">
+                    </td>
+            </tr>
+            <tr>
+              <%if(query.csubject){%>
+                <td>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="csubject" checked>Subject</td>
+                <%}else{%>
+                  <td>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" name="csubject">Subject</td>
+                  <%}%>
+                    <td>
+                      <input type="text" class="input" placeholder="Name" name="subject" value="<%=query.subject%>">
+                    </td>
+            </tr>
+            <tr>
+              <%if(query.ctracker){%>
+                <td>
+                  <label class="checkbox-inline">
+                    <input type="checkbox" name="ctracker" checked>Tracker</label>
+                </td>
+                <%}else{%>
+                  <td>
+                    <label class="checkbox-inline">
+                      <input type="checkbox" name="ctracker">Tracker</label>
+                  </td>
+                  <%}%>
+                    <td>
+                      <select name="tracker" class="input">
+                        <option value="">Choose the Member ...</option>
+                        <%if(query.tracker == "Bug"){%>
+                          <option value="Bug" selected>Bug</option>
+                          <%}else{%>
+                            <option value="Bug">Bug</option>
+                            <%}%>
+
+                              <%if(query.tracker == "Feature"){%>
+                                <option value="Feature" selected>Feature</option>
+                                <%}else{%>
+                                  <option value="Feature">Feature</option>
+                                  <%}%>
+
+                                    <%if(query.tracker == "Support"){%>
+                                      <option value="Support" selected>Support</option>
+                                      <%}else{%>
+                                        <option value="Support">Support</option>
+                                        <%}%>
+                      </select>
+                    </td>
+            </tr>
+            <tr>
+              <td>
+                <input type="submit" class="btn btn-primary" value="Search">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+      <h2>Options</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-2">
+            Columns
+          </div>
+          <form action="/apply/<%=projectid%>" method="POST">
+            <input type="hidden" name="query" value="<%=query%>">
+            <div class="col-3">
+              <div class="custom-control custom-checkbox">
+                <%if(column[0].id == true || query.columnId){%>
+                  <input type="checkbox" class="custom-control-input" name="columnId" id="columnId" checked>
+                  <label class="custom-control-label" for="columnId">ID</label>
+                  <%}else{%>
+                    <input type="checkbox" class="custom-control-input" name="columnId" id="columnId">
+                    <label class="custom-control-label" for="columnId">ID</label>
+                    <%}%>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%if(column[0].name == true || query.columnName){%>
+                  <input type="checkbox" class="custom-control-input" name="columnName" id="columnSubject" checked>
+                  <label class="custom-control-label" for="columnSubject">subject</label>
+                  <%}else{%>
+                    <input type="checkbox" class="custom-control-input" name="columnName" id="columnSubject">
+                    <label class="custom-control-label" for="columnSubject">Subject</label>
+                    <%}%>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <%if(column[0].member == true || query.columnMember){%>
+                  <input type="checkbox" class="custom-control-input" name="columnMember" id="columnTracker" checked>
+                  <label class="custom-control-label" for="columnTracker">Tracker</label>
+                  <%}else{%>
+                    <input type="checkbox" class="custom-control-input" name="columnMember" id="columnTracker">
+                    <label class="custom-control-label" for="columnTracker">Tracker</label>
+                    <%}%>
+              </div>
+              <br>
+              <div>
+                <input type="submit" class="btn btn-primary" value="Apply">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="columnId">#</th>
+            <th scope="col" class="columnName">Subject</th>
+            <th scope="col" class="columnMember">Tracker</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%data.forEach(function(val){%>
+            <tr>
+              <th scope="row" class="columnId">
+                <%=val.issueid%>
+              </th>
+              <td class="columnName">
+                <%=val.subject%>
+              </td>
+              <td class="columnMember">
+                <%=val.tracker%>
+              </td>
+              <td>
+                <a href="/issues/edit/<%=projectid%>/<%=val.issueid%>">
+                  <button type="submit" class="b-edit" name="edit">Edit</button>
+                </a>
+                <a href="/issues/delete/<%=projectid%>/<%=val.issueid%>" onclick="return confirm('apakah anda yakin ?')">
+                  <button type="submit" class="b-delete" name="delete">Delete</button>
+                </a>
+              </td>
+            </tr>
+            <%});%>
+        </tbody>
+      </table>
+      <nav aria-label="...">
+        <ul class="pagination">
+          <!-- if(url ==) -->
+          <%if(page <= 0){%>
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <%}else{%>
+              <li class="page-item">
+                <a class="page-link" href="/issues/<%=projectid%>/?page=<%=page-1%>" tabindex="-1">Previous</a>
+              </li>
+              <%}%>
+                <%for(var i = 0; i < Math.floor(leng/3)+1; i++){%>
+                  <%if(`/issues/${projectid}/?page=${i}` == url){%>
+                    <li class="page-item active">
+                      <a href="/issues/<%=projectid%>/?page=<%=i%>">
+                        <input type="submit" class="page-link" name="page" value="<%=i+1%>">
+                      </a>
+                    </li>
+                    <%}else if ('/issues/${projectid}/' == url){%>
+                      <%if(i == 0){%>
+                        <li class="page-item active">
+                          <a href="/issues/<%=projectid%>/?page=<%=i%>">
+                            <input type="submit" class="page-link" name="page" value="<%=i+1%>">
+                          </a>
+                        </li>
+                        <%}else{%>
+                          <li class="page-item">
+                            <a href="/issues/<%=projectid%>/?page=<%=i%>">
+                              <input type="submit" class="page-link" name="page" value="<%=i+1%>">
+                            </a>
+                          </li>
+                          <%}%>
+                            <%}else{%>
+                              <li class="page-item">
+                                <a href="/issues/<%=projectid%>/?page=<%=i%>">
+                                  <input type="submit" class="page-link" name="page" value="<%=i+1%>">
+                                </a>
+                              </li>
+                              <%}%>
+                                <%}%>
+                                  <%if(page == Math.floor(leng/3)){%>
+                                    <li class="page-item disabled">
+                                      <a class="page-link" href="#" tabindex="+1">Next</a>
+                                    </li>
+                                    <%}else{%>
+                                      <li class="page-item">
+                                        <a class="page-link" href="/issues/<%=projectid%>/?page=<%=parseInt(page)+1%>" tabindex="+1">Next</a>
+                                      </li>
+                                      <%}%>
+        </ul>
+      </nav>
+      <a href="/issues/add/<%=projectid%>">
+        <button type="submit" class="btn btn-primary">Add</button>
+      </a>
+
+
+
+
+      <!-- Optional JavaScript -->
+      <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/core.js"></script>
+      <script>
+        $("input:checkbox:not(:checked)").each(function () {
+          var column = "table ." + $(this).attr("name");
+          $(column).hide();
+        });
+
+        $("input:checkbox").click(function () {
+          var column = "table ." + $(this).attr("name");
+          $(column).toggle();
+        });
+      </script>
+    </div>
+  </div>
+
+</body>
+
+</html>

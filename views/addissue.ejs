@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Issue</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="./../../stylesheets/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Project Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Project
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            </ul>
+        </div>
+        <a href="/logout" onclick="confirm('are you sure ?')">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</button>
+        </a>
+    </nav>
+    <div class="row">
+        <div class="col-md-2" style="padding:0px; background-color:#f0f0f0; height: auto;">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link" id="v-pills-home-tab"href="/details/<%=projectid%>" aria-selected="false">Overview</a>
+            <a class="nav-link" id="v-pills-profile-tab" href="" aria-selected="false">Activity</a>
+            <a class="nav-link" id="v-pills-messages-tab" href="/members/<%=projectid%>" aria-selected="false">Members</a>
+            <a class="nav-link active" href="" id="v-pills-settings-tab" data-toggle="pill" role="tab" aria-controls="v-pills-settings" aria-selected="true">Issues</a>
+            </div>
+        </div>
+    <div class="body">
+        <h1>New Issue</h1>
+        <hr>
+        <form action="/issues/add/<%=projectid%>" method="POST" style="border: 1px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Tracker</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-tracker-bug" name="tracker" value="Bug" class="custom-control-input">
+                        <label class="custom-control-label" for="n-tracker-bug">Bug</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-tracker-feature" name="tracker" value="Feature" class="custom-control-input">
+                        <label class="custom-control-label" for="n-tracker-feature">Feature</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-tracker-Support" name="tracker" value="Support" class="custom-control-input">
+                        <label class="custom-control-label" for="n-tracker-Support">Support</label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Subject</p>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="subject" class="form-control n-issue" placeholder="Subject">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Description</p>
+                </div>
+                <div class="col-md-4">
+                    <textarea name="description" cols="30" rows="2" class="form-control n-issue" placeholder="Description"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                    <div class="col-md-6">
+                        <p>Status</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="n-status-new" name="status" value="New" class="custom-control-input">
+                            <label class="custom-control-label" for="n-status-new">New</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="n-status-inProgress" name="status" value="In Progress" class="custom-control-input">
+                            <label class="custom-control-label" for="n-status-inProgress">In Progress</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="n-status-resolved" name="status" value="Resolved" class="custom-control-input">
+                            <label class="custom-control-label" for="n-status-resolved">Resolved</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="n-status-feedback" name="status" value="Feedback" class="custom-control-input">
+                            <label class="custom-control-label" for="n-status-feedback">Feedback</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="n-status-closed" name="status" value="Closed" class="custom-control-input">
+                            <label class="custom-control-label" for="n-status-closed">Closed</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="n-status-rejected" name="status" value="Rejected" class="custom-control-input">
+                            <label class="custom-control-label" for="n-status-rejected">Rejected</label>
+                        </div>
+                    </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Priority</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-priority-normal" name="priority" value="Normal" class="custom-control-input">
+                        <label class="custom-control-label" for="n-priority-normal">Normal</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-priority-high" name="priority" value="High" class="custom-control-input">
+                        <label class="custom-control-label" for="n-priority-high">High</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-priority-urgent" name="priority" value="Urgent" class="custom-control-input">
+                        <label class="custom-control-label" for="n-priority-urgent">Urgent</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" id="n-priority-immediate" name="priority" value="Immediate" class="custom-control-input">
+                        <label class="custom-control-label" for="n-priority-immediate">Immediate</label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Assigne</p>
+                </div>
+                <div class="col-md-4">
+                    <select name="assignee" class="custom-select form-control n-issue">
+                        <%for(let i = 0; i < data.length; i++){%>
+                            <option value="<%=data[i].userid%>"> <%=data[i].fullname%> </option>
+                        <%}%>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Start Date</p>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control n-issue" name="stdate" placeholder="Start Date">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Due Date</p>
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control n-issue" name="dudate" placeholder="Due Date">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Estimated Time</p>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control n-issue" name="esdate" placeholder="Estimated Date">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>% Done</p>
+                </div>
+                <div class="col-md-4">
+                    <select name="done" class="form-control n-issue">
+                        <%for(let i = 0; i <= 100; i+=10){%>
+                            <option value="<%=i%>"><%=i%>%</option>
+                        <%}%>
+                    </select>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                   <p>Files</p> 
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="files" class="form-control n-issue" placeholder="Files">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="submit" class="btn btn-primary">
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

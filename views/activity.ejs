@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./../stylesheets/style.css">
+    <title>Project Details</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Project Management System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Project<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+            </ul>
+        </div>
+        <a href="/logout" onclick="confirm('are you sure ?')">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sign out</button>
+        </a>
+    </nav>
+    <div class="row">
+        <div class="col-md-2" style="padding:0px; background-color:#f0f0f0; height: 600px;">
+            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" href="/details/<%=projectid%>" role="tab" aria-controls="v-pills-home" aria-selected="true">Overview</a>
+                <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="" role="tab" aria-controls="v-pills-profile" aria-selected="false">Activity</a>
+                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="/members/<%=projectid%>" role="tab" aria-controls="v-pills-messages" aria-selected="false">Members</a>
+                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="/issues/<%=projectid%>" role="tab" aria-controls="v-pills-settings" aria-selected="false">Issues</a>
+            </div>
+        </div>
+        <div class="col-md-8" style="padding: 0px;">
+            <div class="body">
+                <h1>Activity</h1>
+                <hr>
+                <div class="library-system">
+                    <p>Activity</p>
+                    <p>From <%= moment().format('DD-MM-YYYY')%> to <%=moment(data[data.length -1].time).format('DD-MM-YYYY')%></p>
+                    <%if(date1.length != 0){%>
+                        <%if(date1[0].projectid == projectid){%>
+                            <p><%=moment().format('dddd')%></p>
+                            <ul>
+                                <%date1.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+
+                    <%if(date2.length != 0){%>
+                        <%if(date2[0].projectid == projectid){%>
+                            <p><%=moment().subtract(1, 'days').format('dddd')%></p>
+                            <ul>
+                                <%date2.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+
+                    <%if(date3.length != 0){%>
+                        <%if(date3[0].projectid == projectid){%>
+                            <p><%=moment().subtract(2, 'days').format('dddd')%></p>
+                            <ul>
+                                <%date3.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+
+                    <%if(date4.length != 0){%>
+                        <%if(date4[0].projectid == projectid){%>
+                            <p><%=moment().subtract(3, 'days').format('dddd')%></p>
+                            <ul>
+                                <%date4.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+
+                    <%if(date5.length != 0){%>
+                        <%if(date5[0].projectid == projectid){%>
+                            <p><%=moment().subtract(4, 'days').format('dddd')%></p>
+                            <ul>
+                                <%date5.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+                    
+                    <%if(date6.length != 0){%>
+                        <%if(date6[0].projectid == projectid){%>
+                            <p><%=moment().subtract(5, 'days').format('dddd')%></p>
+                            <ul>
+                                <%date6.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+                    
+                    <%if(date7.length != 0){%>
+                        <%if(date7[0].projectid == projectid){%>
+                            <p><%=moment().subtract(6, 'days').format('dddd')%></p>
+                            <ul>
+                                <%date7.forEach((val) => {%>
+                                    <%if(val.projectid == projectid){%>
+                                        <li><%=moment(val.time).format('HH:mm')%> <%=val.title%> #<%=val.issueid%> (<%=val.status%>): <%=val.description%>, author: <%=val.fullname%></li>
+                                    <%}%>
+                                <%})%>
+                            </ul>
+                        <%}%>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
